@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Vulnerability Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1>🔐 CODE VULNERABILITY ANALYZER</h1>
+        <p>AI-Powered Security Assessment Platform</p>
+    </header>
+
+    <div class="main-content">
+        <!-- LEFT SIDE - REQUEST -->
+        <section class="request-section">
+            <div class="section-header">
+                <div class="section-title">REQUEST</div>
+            </div>
+
+            <div class="controls">
+                <select id="language" class="language-select">
+                    <option value="Java">Java</option>
+                    <option value="Python">Python</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="C++">C++</option>
+                    <option value="C#">C#</option>
+                    <option value="PHP">PHP</option>
+                    <option value="SQL">SQL</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Go">Go</option>
+                    <option value="Rust">Rust</option>
+                </select>
+                <button id="analyzeBtn" class="analyze-btn">
+                    🔍 ANALYZE
+                </button>
+            </div>
+
+            <textarea id="code" class="code-input" placeholder="Paste your code here for security analysis..."></textarea>
+        </section>
+
+        <!-- RIGHT SIDE - RESPONSE -->
+        <section class="response-section">
+            <div class="section-header">
+                <div class="section-title">RESPONSE</div>
+            </div>
+
+            <div id="result" class="result-output">
+                <div class="placeholder">
+                    <p>Security analysis results will appear here</p>
+                    <p style="margin-top: 10px; font-size: 0.8em;">Analyzed code vulnerabilities with solutions</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>⚡ POWERED BY GOOGLE AI & ADVANCED SECURITY ALGORITHMS</p>
+    </footer>
+</div>
+
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+    <div class="loading-text">
+        <span class="terminal-line">SCANNING FOR VULNERABILITIES...</span>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

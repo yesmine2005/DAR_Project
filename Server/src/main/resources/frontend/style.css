@@ -1,0 +1,413 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', 'Monaco', monospace;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    padding: 0;
+    line-height: 1.6;
+    color: #228B22; /* darker green */
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: rgba(13, 17, 23, 0.95);
+}
+
+.header {
+    background: linear-gradient(135deg, #228B22 0%, #196619 100%);
+    color: #0c0c0c;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #228B22;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(34, 139, 34, 0.15) 50%, transparent 70%);
+    animation: scan 5s ease-in-out infinite;
+}
+
+@keyframes scan {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
+}
+
+.header h1 {
+    font-size: 2.2em;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header p {
+    font-size: 1em;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Main Content - Horizontal Split */
+.main-content {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 120px);
+}
+
+/* Left Side - REQUEST */
+.request-section {
+    flex: 1;
+    border-right: 2px solid #228B22;
+    display: flex;
+    flex-direction: column;
+    background: rgba(13, 17, 23, 0.9);
+    padding: 20px;
+}
+
+/* Right Side - RESPONSE */
+.response-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(13, 17, 23, 0.9);
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #228B22;
+}
+
+.section-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #228B22;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.language-select {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #228B22;
+    border-radius: 5px;
+    font-size: 14px;
+    background: rgba(13, 17, 23, 0.8);
+    color: #228B22;
+    font-family: 'Courier New', monospace;
+}
+
+.analyze-btn {
+    background: linear-gradient(135deg, #228B22, #196619);
+    color: #0c0c0c;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.analyze-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(34, 139, 34, 0.4);
+}
+
+.analyze-btn:disabled {
+    background: #333;
+    color: #666;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.code-input {
+    flex: 1;
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #228B22;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    background: rgba(13, 17, 23, 0.8);
+    color: #228B22;
+    resize: none;
+    line-height: 1.5;
+}
+
+.result-output {
+    flex: 1;
+    border: 2px solid #228B22;
+    border-radius: 5px;
+    background: rgba(13, 17, 23, 0.8);
+    overflow-y: auto;
+    min-height: 200px;
+}
+
+/* Vulnerability Blocks */
+.vulnerability-blocks {
+    padding: 15px;
+}
+
+.vulnerability-block {
+    background: rgba(13, 17, 23, 0.9);
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.vulnerability-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+}
+
+.vulnerability-block:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(34, 139, 34, 0.2);
+}
+
+/* Severity Colors */
+.vulnerability-critical {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+.vulnerability-critical::before { background: #ff4444; }
+.vulnerability-critical .severity { color: #ff4444; }
+
+.vulnerability-high {
+    border-color: #ffaa00;
+    background: rgba(255, 170, 0, 0.1);
+}
+.vulnerability-high::before { background: #ffaa00; }
+.vulnerability-high .severity { color: #ffaa00; }
+
+.vulnerability-medium {
+    border-color: #ffff00;
+    background: rgba(255, 255, 0, 0.1);
+}
+.vulnerability-medium::before { background: #ffff00; }
+.vulnerability-medium .severity { color: #ffff00; }
+
+.vulnerability-low {
+    border-color: #00aaff;
+    background: rgba(0, 170, 255, 0.1);
+}
+.vulnerability-low::before { background: #00aaff; }
+.vulnerability-low .severity { color: #00aaff; }
+
+.vulnerability-info {
+    border-color: #228B22;
+    background: rgba(34, 139, 34, 0.1);
+}
+.vulnerability-info::before { background: #228B22; }
+.vulnerability-info .severity { color: #228B22; }
+
+.vulnerability-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.vulnerability-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #228B22;
+    flex: 1;
+}
+
+.severity {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    padding: 4px 10px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.vulnerability-description {
+    color: #cccccc;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.vulnerability-solution {
+    background: rgba(34, 139, 34, 0.1);
+    border-left: 3px solid #228B22;
+    padding: 12px;
+    border-radius: 5px;
+    margin-top: 8px;
+}
+
+.solution-title {
+    color: #228B22;
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 1em;
+}
+
+.solution-content {
+    color: #cccccc;
+    line-height: 1.5;
+    font-size: 0.9em;
+}
+
+.code-snippet {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #228B22;
+    border-radius: 5px;
+    padding: 12px;
+    margin: 8px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: #228B22;
+    overflow-x: auto;
+}
+
+.placeholder {
+    color: #228B22;
+    text-align: center;
+    padding: 40px 20px;
+    opacity: 0.7;
+}
+
+.footer {
+    background: rgba(13, 17, 23, 0.9);
+    text-align: center;
+    padding: 15px;
+    color: #228B22;
+    border-top: 1px solid #228B22;
+    font-size: 0.8em;
+    flex-shrink: 0;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: #228B22;
+    font-family: 'Courier New', monospace;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+    border: 4px solid rgba(34, 139, 34, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #228B22;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.terminal-line {
+    display: inline-block;
+    animation: typing 2s steps(40, end), blink-caret 0.75s step-end infinite;
+    border-right: 2px solid #228B22;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #228B22; }
+}
+
+/* Scrollbar Styling */
+.result-output::-webkit-scrollbar,
+.code-input::-webkit-scrollbar {
+    width: 8px;
+}
+
+.result-output::-webkit-scrollbar-track,
+.code-input::-webkit-scrollbar-track {
+    background: rgba(34, 139, 34, 0.1);
+    border-radius: 4px;
+}
+
+.result-output::-webkit-scrollbar-thumb,
+.code-input::-webkit-scrollbar-thumb {
+    background: #228B22;
+    border-radius: 4px;
+}
+
+.result-output::-webkit-scrollbar-thumb:hover,
+.code-input::-webkit-scrollbar-thumb:hover {
+    background: #196619;
+}
+
+/* Matrix rain effect */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+}
+
