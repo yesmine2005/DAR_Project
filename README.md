@@ -5,8 +5,6 @@ Réalisé par : Imen Dahmen & Yessmine Ellouze
 
 # 🛡️ SafeCode Analyzer
 
-> **Audit de sécurité de code assisté par Intelligence Artificielle (Google Gemini 2.0).**
-
 **Réalisé par :** Imen Dahmen & Yesmine Ellouze
 
 ---
